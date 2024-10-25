@@ -1,126 +1,142 @@
-# SMS Management System
+Overview
+This project is a web-based application designed to manage and monitor SMS services across multiple country-operator pairs. It allows for dynamic control of SMS sending processes, viewing SMS performance, and managing country-operator pairs, with secure access via JWT authentication.
 
-## Overview
-This project is a web-based application that manages and monitors SMS services across multiple country-operator pairs.
+Features
+Process Management: Start, stop, and restart SMS programs dynamically using screen sessions.
+Country-Operator Management: Add, view, and manage country-operator pairs.
+Simulated SMS Sending: Mimics SMS sending to demonstrate functionality.
+JWT Authentication: Protects routes with token-based authentication.
+Prerequisites
+Ensure the following are installed:
 
-## Features
-- Start, stop, and restart SMS programs.
-- Add, update, and remove country-operator pairs.
-- JWT-based authentication for secure access.
-
-## How to Run
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/divyajegan110/sms-management-backend.git
-   cd sms-management-backend
-
-
-
-INSTRUCTIONS: 
-SMS Management System
-Table of Contents
-Introduction
-Technologies Used
-Installation Instructions
-Running the Application
-API Endpoints
-Testing with Postman
-Usage
-Contributing
-License
-Introduction
-The SMS Management System is a web-based application designed to facilitate the management of SMS messages. It allows users to send, receive, and manage SMS communications effectively. This system is particularly useful for organizations that need to handle bulk messaging, notifications, and customer communications.
-
-Technologies Used
-Backend: Flask (Python)
-Database: MongoDB (for country-operator data), MySQL (for metrics)
-Frontend: React (if applicable)
-Environment: Python 3.x
-Tools: Postman (for testing APIs)
-Installation Instructions
-To set up the SMS Management System on your local machine, follow these steps:
-
-Clone the Repository:
+Python 3.6+
+Git
+Virtual Environment tools (venv or virtualenv)
+Setup and Execution
+Step 1: Clone the Repository
+Clone the project to your local machine:
 
 bash
 Copy code
-git clone https://github.com/divyajegan110/sms-management-system.git
-cd sms-management-system
-Install Required Dependencies: Make sure you have Python and pip installed. Then, install the required Python packages:
+git clone https://github.com/divyajegan110/sms-management-backend.git
+cd sms-management-backend
+Step 2: Set Up a Virtual Environment
+Create a virtual environment to manage project dependencies:
+
+bash
+Copy code
+python3 -m venv venv
+Activate the virtual environment:
+
+On Windows:
+bash
+Copy code
+venv\Scripts\activate
+On macOS/Linux:
+bash
+Copy code
+source venv/bin/activate
+Step 3: Install Project Dependencies
+With the virtual environment activated, install the required packages:
 
 bash
 Copy code
 pip install -r requirements.txt
-Set Up the Database:
+Step 4: Configure Environment Variables
+Create a .env file in the project root to securely store configuration details:
 
-Create a MongoDB database for country-operator data.
-Set up a MySQL database for metrics (if applicable).
-Update the database connection strings in the configuration files.
-Environment Variables:
+plaintext
+Copy code
+JWT_SECRET_KEY=your_jwt_secret_key
+Replace your_jwt_secret_key with a secure string of your choice. This key is used to encode JWT tokens for secure access.
 
-Create a .env file in the root directory to store your environment variables, such as database URIs, API keys, etc.
-Running the Application
-To run the SMS Management System, execute the following command:
+Step 5: Start the Flask Application
+Run the Flask application:
 
 bash
 Copy code
 python app.py
-This command will start the Flask server, and you should see output indicating that the server is running.
+The app will start at http://127.0.0.1:5000 by default.
 
-API Endpoints
-Here are the main API endpoints available in the SMS Management System:
+Using the Application
+1. Home Route
+Open your browser and go to http://127.0.0.1:5000/. You should see:
 
-Send SMS
-
-Endpoint: POST /api/sms/send
-Description: Sends an SMS message.
-Request Body:
 json
 Copy code
 {
-  "phoneNumber": "string",
-  "message": "string"
+    "message": "SMS Management System Running"
 }
-Get SMS Status
+2. API Endpoints
+Country-Operator Pair Management
+Add a Country-Operator Pair: Add a new country-operator pair to the list.
 
-Endpoint: GET /api/sms/status/{smsId}
-Description: Retrieves the status of a sent SMS.
-Get Metrics
+php
+Copy code
+GET http://127.0.0.1:5000/add_pair/<country>/<operator>
+Example: http://127.0.0.1:5000/add_pair/India/Airtel
 
-Endpoint: GET /api/metrics
-Description: Fetches metrics related to sent and received SMS messages.
-Testing with Postman
-To test the API endpoints, use Postman by following these steps:
+Retrieve All Pairs: Get a list of all country-operator pairs.
 
-Download and Install Postman:
+arduino
+Copy code
+GET http://127.0.0.1:5000/get_pairs
+Process Management
+Start a Program: Start an SMS program in a screen session.
 
-Go to Postman’s website and download the application for your operating system.
-Set Up a New Request:
+sql
+Copy code
+GET http://127.0.0.1:5000/start/<program>
+Example: http://127.0.0.1:5000/start/program1
 
-Open Postman and create a new request.
-Select the appropriate HTTP method (GET, POST, etc.) for your endpoint.
-Enter the URL:
+Stop a Program: Stop an SMS program.
 
-Input the local server URL (e.g., http://localhost:5000/api/sms/send).
-Set Headers (If Needed):
+vbnet
+Copy code
+GET http://127.0.0.1:5000/stop/<program>
+Example: http://127.0.0.1:5000/stop/program1
 
-If your API requires headers, such as Content-Type, make sure to set them in the Headers tab.
-Input Request Body (for POST requests):
+Restart a Program: Restart an SMS program.
 
-Select the Body tab and choose raw or form-data as needed.
-Enter the JSON payload for your request.
-Send the Request:
+arduino
+Copy code
+GET http://127.0.0.1:5000/restart/<program>
+Example: http://127.0.0.1:5000/restart/program1
 
-Click the Send button to submit your request.
-Observe the response from the server in the lower section of Postman.
-Usage
-Once the application is running and your API endpoints are set up, you can start sending and managing SMS messages through the defined endpoints. You can also integrate the system into your existing applications to enhance your messaging capabilities.
+Simulated SMS Sending
+Send SMS: Simulate sending an SMS.
+arduino
+Copy code
+GET http://127.0.0.1:5000/send_sms/<phone_number>
+Example: http://127.0.0.1:5000/send_sms/1234567890
+JWT Authentication
+Login and Get Token: Use Postman or a similar tool to send a POST request to:
 
-Contributing
-If you would like to contribute to this project, please follow these steps:
+arduino
+Copy code
+POST http://127.0.0.1:5000/login
+Request Body (JSON):
 
-Fork the repository.
-Create a new branch: git checkout -b feature/YourFeatureName.
-Make your changes and commit them: git commit -m "Add some feature".
-Push to the branch: git push origin feature/YourFeatureName.
-Create a new Pull Request.
+json
+Copy code
+{
+    "username": "admin",
+    "password": "password"
+}
+You’ll receive an access_token to use for authenticated routes.
+
+Access Protected Route: Use the access_token to access protected routes. For example, to access /protected:
+
+Add an Authorization header: Bearer <your_token>
+Send a GET request to:
+vbnet
+Copy code
+GET http://127.0.0.1:5000/protected
+Shutting Down the Virtual Environment
+When you’re finished, deactivate the virtual environment:
+
+bash
+Copy code
+deactivate
+Conclusion
+The SMS Management System is now set up and ready for use. You can start, stop, and manage SMS processes, add country-operator pairs, and securely access protected routes with JWT authentication.
