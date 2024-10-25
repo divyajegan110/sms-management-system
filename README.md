@@ -73,6 +73,3 @@ When you’re finished, deactivate the virtual environment by running `deactivat
 ## **Conclusion**
 The SMS Management System is now set up and ready for use. You can start, stop, and manage SMS processes, add country-operator pairs, and securely access protected routes with JWT authentication.
 
----
-
-This README provides a clear guide on running the program, describing all steps without separate code blocks. Let me know if you need further assistance!
