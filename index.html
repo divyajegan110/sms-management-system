@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Management System</title>
+    <script src="static/script.js" defer></script>
+</head>
+<body>
+    <h1>SMS Management System</h1>
+
+    <!-- Add Country-Operator Pair Section -->
+    <h2>Add Country-Operator Pair</h2>
+    <form id="addPairForm">
+        <input type="text" id="country" placeholder="Country" required>
+        <input type="text" id="operator" placeholder="Operator" required>
+        <button type="submit">Add Pair</button>
+    </form>
+    <div id="addPairResult"></div>
+
+    <!-- Start/Stop/Restart Program Section -->
+    <h2>Manage Programs</h2>
+    <input type="text" id="programName" placeholder="Program Name" required>
+    <button onclick="startProgram()">Start Program</button>
+    <button onclick="stopProgram()">Stop Program</button>
+    <button onclick="restartProgram()">Restart Program</button>
+    <div id="programResult"></div>
+
+    <!-- Send SMS Section -->
+    <h2>Send SMS</h2>
+    <form id="sendSmsForm">
+        <input type="text" id="phoneNumber" placeholder="Enter Phone Number (e.g., +919025727571)" required>
+        <button type="submit">Send SMS</button>
+    </form>
+    <div id="smsResult"></div>
+
+    <!-- Instructions for E.164 Format -->
+    <p>Note: Enter phone number in E.164 format (e.g., +91xxxxxxxxxx).</p>
+</body>
+</html>
